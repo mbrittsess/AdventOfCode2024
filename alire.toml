@@ -1,0 +1,12 @@
+name = "aoc2024"
+description = "Solutions to Advent of Code 2024"
+version = "0.1.0-dev"
+
+authors = ["Matthew Sessions"]
+maintainers = ["Matthew Sessions <mbrittsess@hotmail.com>"]
+maintainers-logins = ["mbrittsess"]
+licenses = "MIT"
+website = ""
+tags = []
+
+executables = ["aoc2024"]
