@@ -2,12 +2,9 @@
 
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Characters.Handling; use Ada.Characters.Handling;
-with Ada.Integer_Text_IO;
 with Digit_Text_IO; use Digit_Text_IO;
 
 procedure Year2023Day1 is
-   package IIO renames Ada.Integer_Text_IO;
-   
    Total : Integer := 0;
 begin
    while not End_Of_File loop

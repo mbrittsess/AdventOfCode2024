@@ -5,7 +5,10 @@ project Aoc2024 is
    for Object_Dir use "obj/" & Aoc2024_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Exec_Dir use "bin";
-   for Main use ("year2023day1.adb");
+   for Main use (
+         "year2023day1.adb",
+         "day1.adb"
+      );
 
    package Compiler is
       for Default_Switches ("Ada") use Aoc2024_Config.Ada_Compiler_Switches;
