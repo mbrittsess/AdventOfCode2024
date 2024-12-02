@@ -9,7 +9,8 @@ project Aoc2024 is
          "year2023day1.adb",
          "day1.adb",
          "day1part2.adb",
-         "day1alt.adb"
+         "day1alt.adb",
+         "day2.adb"
       );
 
    package Compiler is
