@@ -8,11 +8,12 @@ project Aoc2024 is
    for Main use (
          "year2023day1.adb",
          "day1.adb",
-         "day1part2.adb"
+         "day1part2.adb",
+         "day1alt.adb"
       );
 
    package Compiler is
-      for Default_Switches ("Ada") use Aoc2024_Config.Ada_Compiler_Switches;
+      for Default_Switches ("Ada") use Aoc2024_Config.Ada_Compiler_Switches & ("-gnat2022");
    end Compiler;
 
    package Binder is
