@@ -2,7 +2,7 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Integer_Text_IO;
 with Ada.Strings.Fixed;
 
-procedure Day2 is
+procedure Day2Part2 is
    type Report_List is array ( Positive range <> ) of Integer;
    
    subtype Safe_Diff_Range is Integer range 1 .. 3;
@@ -130,4 +130,4 @@ begin
    end loop;
 
    Put_Line("Number of safe reports: " & Num_Safe_Reports'Image);
-end Day2;
+end Day2Part2;
