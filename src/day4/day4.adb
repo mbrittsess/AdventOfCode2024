@@ -30,8 +30,14 @@ procedure Day4 is
       end if;
    end Char_At;
 
-   Number_Of_Matches : Natural := 0;
+   function Char_At ( X, Y : Integer ) return Character is
+   begin
+      return Char_At( (X,Y) );
+   end Char_At;
+
+   Part1_Matches, Part2_Matches : Natural := 0;
 begin
+   -- Part 1
    -- Iterate over whole grid
    for Y in Grid'Range(1) loop
       for X in Grid'Range(2) loop
@@ -46,7 +52,7 @@ begin
                         and then Char_At(Pos + Dir*2) = 'A'
                         and then Char_At(Pos + Dir*3) = 'S'
                      then
-                        Number_Of_Matches := @ + 1;
+                        Part1_Matches := @ + 1;
                      end if;
                   end if;
                end loop;
@@ -55,5 +61,30 @@ begin
       end loop;
    end loop;
 
-   Put_Line("Number of matches: " & Number_Of_Matches'Image);
+   Put_Line("Part 1 Matches: " & Part1_Matches'Image);
+
+   -- Part 2
+   -- Iterate over subset of grid
+   for Y in Grid'First(1)+1 .. Grid'Last(1)-1 loop
+      for X in Grid'First(2)+1 .. Grid'Last(2)-1 loop
+         if Char_At(X,Y) = 'A' then -- Are we at middle of potential pattern?
+            declare
+               UR : Character := Char_At(X+1,Y+1);
+               UL : Character := Char_At(X-1,Y+1);
+               DR : Character := Char_At(X+1,Y-1);
+               DL : Character := Char_At(X-1,Y-1);
+            begin
+               if          (        (UR = 'S' and then DL = 'M')
+                            or else (UR = 'M' and then DL = 'S'))
+                  and then (        (UL = 'S' and then DR = 'M')
+                            or else (UL = 'M' and then DR = 'S'))
+               then
+                  Part2_Matches := @ + 1;
+               end if;
+            end;
+         end if;
+      end loop;
+   end loop;
+
+   Put_Line("Part 2 Matches: " & Part2_Matches'Image);
 end Day4;
