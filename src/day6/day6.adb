@@ -8,9 +8,16 @@ procedure Day6 is
 
    Dir_Vectors : constant array( Direction ) of Vector := (
       Right => ( 1, 0),
-      Up    => ( 0, 1),
+      Up    => ( 0,-1),
       Left  => (-1, 0),
-      Down  => ( 0,-1)
+      Down  => ( 0, 1)
+   );
+
+   Rotated_Dirs : constant array( Direction ) of Direction := (
+      Right => Down,
+      Up    => Right,
+      Left  => Up,
+      Down  => Left
    );
 
    Guard_Pos : Vector; -- We don't know the guard's start position yet
@@ -42,13 +49,54 @@ procedure Day6 is
    Visited_Yet : array( Field_Layout'Range(2), Field_Layout'Range(1) ) of Boolean := ( others => ( others => False ) );
 
    function Content_At ( V : Vector ) return Position_Content is
-      (Field_Layout(V(2), V(1)));
+      (Field_Layout(FI.Input_Index(V(2)), FI.Input_Index(V(1))));
    
    procedure Mark_Visited ( V : Vector ) is
    begin
-      Visited_Yet(V(1), V(2)) := True;
+      Visited_Yet(FI.Input_Index(V(1)), FI.Input_Index(V(2))) := True;
    end Mark_Visited;
+
+   function Is_Obstructed ( V : Vector ) return Boolean is
+   begin
+      return Field_Layout(FI.Input_Index(V(2)), FI.Input_Index(V(1))) = Obstacle;
+   end Is_Obstructed;
+
+   function Is_Outside ( V : Vector ) return Boolean is
+   begin
+      return not (FI.Input_Index'Base(V(1)) in Field_Layout'Range(2)) or else not (FI.Input_Index'Base(V(2)) in Field_Layout'Range(1));
+   end Is_Outside;
+
+   function Count_Marked_Positions return Natural is
+      Count : Natural := 0;
+   begin
+      for X in Visited_Yet'Range(1) loop
+         for Y in Visited_Yet'Range(2) loop
+            if Visited_Yet(X,Y) then
+               Count := Count + 1;
+            end if;
+         end loop;
+      end loop;
+
+      return Count;
+   end Count_Marked_Positions;
 
 begin
    Mark_Visited(Guard_Pos); -- Mark the starting location
+
+   loop
+      declare
+         New_Pos : Vector := Guard_Pos + Dir_Vectors(Guard_Dir);
+      begin
+         exit when Is_Outside(New_Pos);
+
+         if Is_Obstructed(New_Pos) then
+            Guard_Dir := Rotated_Dirs(Guard_Dir);
+         else
+            Guard_Pos := New_Pos;
+            Mark_Visited(Guard_Pos);
+         end if;
+      end;
+   end loop;
+
+   Put_Line("Number of visited positions: " & Count_Marked_Positions'Image);
 end Day6;
