@@ -18,5 +18,5 @@ package Day7 is
    
    type Equation_List is array ( Positive range <> ) of Ref_Equation;
    
-   function Can_Be_True ( E : Ref_Equation ) return Boolean;
+   function Can_Be_True ( E : Ref_Equation; Do_Part2 : Boolean := False ) return Boolean;
 end Day7;
