@@ -5,6 +5,9 @@ package Integer_Vector is
    function "+" ( L, R : Vector ) return Vector is
       ( L(1)+R(1), L(2)+R(2) );
    
+   function "-" ( L, R : Vector ) return Vector is
+      ( L(1)-R(1), L(2)-R(2) );
+   
    function "*" ( L : Vector; R : Integer ) return Vector is
       ( L(1)*R, L(2)*R );
 
