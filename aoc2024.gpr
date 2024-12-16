@@ -18,7 +18,8 @@ project Aoc2024 is
          "day5_solution.adb",
          "day6.adb",
          "day7_solution.adb",
-         "day8_solution.adb"
+         "day8_solution.adb",
+         "iterator_test.adb"
       );
 
    package Compiler is
