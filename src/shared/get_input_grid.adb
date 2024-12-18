@@ -29,5 +29,9 @@ function Get_Input_Grid return Grid is
       end if;
    end Get_Input;
 begin
+   for Col in First_Line'Range loop
+      First_Grid(1,Col) := First_Line(Col);
+   end loop;
+   
    return Get_Input(First_Grid);
 end Get_Input_Grid;

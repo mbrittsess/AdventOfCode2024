@@ -14,9 +14,12 @@ package Grids is
    function Element ( G : in out Grid; V : Vector ) return Element_Type;
    function Element ( C : Cursor ) return Element_Type;
    
+   procedure Assign_Element ( G : in out Grid; Row, Col : Positive; Value : Element_Type );
+   procedure Assign_Element ( G : in out Grid; Pos : Vector; Value : Element_Type );
+   
    function Position ( C : Cursor ) return Vector;
    
-   function In_Grid ( G : in out Grid; Row, Col : Positive ) return Boolean;
+   function In_Grid ( G : in out Grid; Row, Col : Integer ) return Boolean;
    function In_Grid ( G : in out Grid; V : Vector ) return Boolean;
 
    function Has_Element ( C : Cursor ) return Boolean;

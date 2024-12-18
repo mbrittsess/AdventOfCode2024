@@ -14,14 +14,24 @@ package body Grids is
       return Element(C.Grid.all, C.Position);
    end Element;
    
+   procedure Assign_Element ( G : in out Grid; Row, Col : Positive; Value : Element_Type ) is
+   begin
+      G(Row,Col) := Value;
+   end Assign_Element;
+   
+   procedure Assign_Element ( G : in out Grid; Pos : Vector; Value : Element_Type ) is
+   begin
+      Assign_Element(G, Pos(2), Pos(1), Value);
+   end Assign_Element;
+   
    function Position ( C : Cursor ) return Vector is
    begin
       return C.Position;
    end Position;
    
-   function In_Grid ( G : in out Grid; Row, Col : Positive ) return Boolean is
+   function In_Grid ( G : in out Grid; Row, Col : Integer ) return Boolean is
    begin
-      return Row in G'Range(1) and then Row in G'Range(2);
+      return Row in G'Range(1) and then Col in G'Range(2);
    end In_Grid;
    
    function In_Grid ( G : in out Grid; V : Vector ) return Boolean is
