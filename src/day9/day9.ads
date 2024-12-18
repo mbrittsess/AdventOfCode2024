@@ -2,6 +2,7 @@ with Ada.Text_IO;
 
 package Day9 is
    type Storage_Kind is (File, Empty);
+   subtype File_Index is Natural;
 
    -- The default value for Kind is required for us to be able to have an array of mixed Block types
    type Block (Kind : Storage_Kind := Empty) is
@@ -9,7 +10,7 @@ package Day9 is
          Size : Natural;
          case Kind is
             when File =>
-               Index : Natural;
+               Index : File_Index;
             when others =>
                null;
          end case;
