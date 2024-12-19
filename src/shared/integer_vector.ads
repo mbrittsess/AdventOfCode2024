@@ -13,4 +13,12 @@ package Integer_Vector is
 
    function To_String ( V : Vector ) return String is
       ("(" & V(1)'Image & "," & V(2)'Image & ")");
+   
+   Four_Directions : constant array (Positive range <>) of Vector :=
+      (
+         ( 1, 0),
+         ( 0, 1),
+         (-1, 0),
+         ( 0,-1)
+      );
 end Integer_Vector;

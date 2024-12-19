@@ -10,8 +10,8 @@ package Grids is
 
    type Cursor is private;
 
-   function Element ( G : in out Grid; Row, Col : Positive ) return Element_Type;
-   function Element ( G : in out Grid; V : Vector ) return Element_Type;
+   function Element ( G : in Grid; Row, Col : Positive ) return Element_Type;
+   function Element ( G : in Grid; V : Vector ) return Element_Type;
    function Element ( C : Cursor ) return Element_Type;
    
    procedure Assign_Element ( G : in out Grid; Row, Col : Positive; Value : Element_Type );
@@ -19,8 +19,8 @@ package Grids is
    
    function Position ( C : Cursor ) return Vector;
    
-   function In_Grid ( G : in out Grid; Row, Col : Integer ) return Boolean;
-   function In_Grid ( G : in out Grid; V : Vector ) return Boolean;
+   function In_Grid ( G : in Grid; Row, Col : Integer ) return Boolean;
+   function In_Grid ( G : in Grid; V : Vector ) return Boolean;
 
    function Has_Element ( C : Cursor ) return Boolean;
 

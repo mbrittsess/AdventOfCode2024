@@ -1,10 +1,10 @@
 package body Grids is
-   function Element ( G : in out Grid; Row, Col : Positive ) return Element_Type is
+   function Element ( G : in Grid; Row, Col : Positive ) return Element_Type is
    begin
       return G(Row,Col);
    end Element;
    
-   function Element ( G : in out Grid; V : Vector ) return Element_Type is
+   function Element ( G : in Grid; V : Vector ) return Element_Type is
    begin
       return G(V(2), V(1));
    end Element;
@@ -29,12 +29,12 @@ package body Grids is
       return C.Position;
    end Position;
    
-   function In_Grid ( G : in out Grid; Row, Col : Integer ) return Boolean is
+   function In_Grid ( G : in Grid; Row, Col : Integer ) return Boolean is
    begin
       return Row in G'Range(1) and then Col in G'Range(2);
    end In_Grid;
    
-   function In_Grid ( G : in out Grid; V : Vector ) return Boolean is
+   function In_Grid ( G : in Grid; V : Vector ) return Boolean is
    begin
       return In_Grid(G, V(2), V(1));
    end In_Grid;
