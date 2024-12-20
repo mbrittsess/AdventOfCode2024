@@ -22,6 +22,7 @@ project Aoc2024 is
          "day8_altsolution.adb",
          "day9-solution.adb",
          "day10-solution.adb",
+         "day11-solution.adb",
          "iterator_test.adb",
          "grid_test.adb"
       );
