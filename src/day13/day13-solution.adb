@@ -8,21 +8,21 @@ procedure Day13.Solution is
 
    -- Returns 0 if no prize is possible
    function Tokens_Needed ( M : Machine; Limit_100 : Boolean := True ) return Long_Long_Natural is
-      PX_Numerator : Vector_Component := M.A(1) * ( M.Prize(1)*M.B(2) - M.Prize(2)*M.B(1) );
-      PX_Denominator : Vector_Component := M.A(1)*M.B(2) - M.A(2)*M.B(1);
-      Same_Sign : Boolean := (PX_Numerator < 0) = (PX_Denominator < 0);
+      PX_Numerator : Vector_Component := M.Prize(1)*M.B(2) - M.Prize(2)*M.B(1);
+      PY_Numerator : Vector_Component := M.Prize(2)*M.A(1) - M.Prize(1)*M.A(2);
+      P_Denominator : Vector_Component := M.A(1)*M.B(2) - M.A(2)*M.B(1);
+      All_Same_Sign : Boolean := (PX_Numerator < 0) = (P_Denominator < 0) and then (PY_Numerator < 0) = (P_Denominator < 0);
    begin
-      if Same_Sign and then PX_Numerator < 0 then
+      if All_Same_Sign and then P_Denominator < 0 then
          PX_Numerator := abs @;
-         PX_Denominator := abs @;
+         PY_Numerator := abs @;
+         P_Denominator := abs @;
       end if;
 
-      if Same_Sign and then Is_Even_Multiple(PX_Numerator, PX_Denominator) then
+      if All_Same_Sign and then Is_Even_Multiple(PX_Numerator, P_Denominator) and then Is_Even_Multiple(PY_Numerator, P_Denominator) then
          declare
-            PX : Vector_Component := PX_Numerator / PX_Denominator;
-            A_Mult : Natural_Component := PX / M.A(1);
-            B_X_Diff : Natural_Component := M.Prize(1) - PX;
-            B_Mult : Natural_Component := B_X_Diff / M.B(1);
+            A_Mult : Natural_Component := PX_Numerator / P_Denominator;
+            B_Mult : Natural_Component := PY_Numerator / P_Denominator;
          begin
             if Limit_100 and then (A_Mult > 100 or else B_Mult > 100) then
                return 0;
