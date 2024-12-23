@@ -11,5 +11,4 @@ package Day13 is
    function Is_Even_Multiple ( Larger, Smaller : Positive ) return Boolean
       with Pre => Larger >= Smaller;
    
-   
 end Day13;
