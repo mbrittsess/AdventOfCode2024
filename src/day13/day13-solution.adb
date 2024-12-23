@@ -3,11 +3,12 @@ with Day13.Input; use Day13.Input;
 with Ada.Text_IO; use Ada.Text_IO;
 
 procedure Day13.Solution is
+   subtype Long_Long_Natural is Long_Long_Integer range 0 .. Long_Long_Integer'Last;
    Machine_Input : Machine_List := Read_Machine_Input;
 
    -- Returns 0 if no prize is possible
-   function Tokens_Needed ( M : Machine; Limit_100 : Boolean := True ) return Natural is
-      PX_Numerator : Vector_Component := M.A(1) * ( M.Prize(1)*( M.Prize(2) + M.B(2) ) - M.Prize(2)*( M.Prize(1) + M.B(1) ) );
+   function Tokens_Needed ( M : Machine; Limit_100 : Boolean := True ) return Long_Long_Natural is
+      PX_Numerator : Vector_Component := M.A(1) * ( M.Prize(1)*M.B(2) - M.Prize(2)*M.B(1) );
       PX_Denominator : Vector_Component := M.A(1)*M.B(2) - M.A(2)*M.B(1);
       Same_Sign : Boolean := (PX_Numerator < 0) = (PX_Denominator < 0);
    begin
@@ -26,7 +27,7 @@ procedure Day13.Solution is
             if Limit_100 and then (A_Mult > 100 or else B_Mult > 100) then
                return 0;
             else
-               return Natural(A_Mult*3 + B_Mult);
+               return Long_Long_Natural(A_Mult*3 + B_Mult);
             end if;
          end;
       else
@@ -34,19 +35,19 @@ procedure Day13.Solution is
       end if;
    end Tokens_Needed;
 
-   Total_Tokens_Part1 : Natural := [for Mach of Machine_Input => Tokens_Needed(Mach)]'Reduce("+", Natural'(0));
-   --Total_Tokens_Part2 : Natural := [for Mach of Machine_Input => 
-   --   Tokens_Needed
-   --   (
-   --      (
-   --         A => Mach.A,
-   --         B => Mach.B,
-   --         Prize => Mach.Prize+(10_000_000_000_000,10_000_000_000_000)
-   --      ),
-   --      False
-   --   )
-   --]'Reduce("+", Natural'(0));
+   Total_Tokens_Part1 : Long_Long_Natural := [for Mach of Machine_Input => Tokens_Needed(Mach)]'Reduce("+", Long_Long_Natural'(0));
+   Total_Tokens_Part2 : Long_Long_Natural := [for Mach of Machine_Input => 
+      Tokens_Needed
+      (
+         (
+            A => Mach.A,
+            B => Mach.B,
+            Prize => Mach.Prize+(10_000_000_000_000,10_000_000_000_000)
+         ),
+         False
+      )
+   ]'Reduce("+", Long_Long_Natural'(0));
 begin
    Put_Line("Tokens needed (part 1): " & Total_Tokens_Part1'Image);
-   --Put_Line("Tokens needed (part 2): " & Total_Tokens_Part2'Image);
+   Put_Line("Tokens needed (part 2): " & Total_Tokens_Part2'Image);
 end Day13.Solution;
