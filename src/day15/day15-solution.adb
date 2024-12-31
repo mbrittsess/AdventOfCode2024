@@ -61,18 +61,10 @@ procedure Day15.Solution is
       
       return Score;
    end Compute_Score;
-begin
-   --Put_Line("Starting warehouse state:");
-   --Print_Warehouse(Warehouse);
-   --New_Line;
-   
+begin   
    for Move of Moves loop
       Advance_Simulation(Move);
-      --Put_Line("Next state (move " & Move'Image & "):");
-      --Print_Warehouse(Warehouse);
-      --New_Line;
    end loop;
    
    Put_Line("Score is: " & Compute_Score(Warehouse)'Image);
-      
 end Day15.Solution;
